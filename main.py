@@ -1,3 +1,8 @@
+"""
+to initiate playwright recording session:
+playwright codegen demo.playwright.dev/todomvc/#/
+"""
+
 import time
 from playwright.sync_api import Playwright, sync_playwright
 
