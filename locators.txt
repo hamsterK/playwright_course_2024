@@ -1,0 +1,29 @@
+ID selector:
+- CSS
+page.locator('#new-todo').click()
+- XPATH
+page.locator('//*[@id="new-todo"]').click()
+
+CLASS selector:
+- CSS
+page.locator(".new-todo").click()
+- XPATH
+page.locator("//*[@class='new-todo']").click()
+
+Combination of classes:
+- CSS
+page.locator("css=.first-class.another-class").click()
+- XPATH
+page.locator("xpath=//div[contains(@class, 'first-class') and contains(@class, 'another-class')]".click()
+
+Attribute selector:
+- CSS
+page.locator("[placeholder='Your email address']".click()
+- XPATH
+page.locator("//*[@class='new-todo']").click()
+
+Combinations of selectors:
+- CSS
+page.locator("input[placeholder='Your email address']".click()
+- XPATH
+page.locator("//input[@placeholder='Your email address']").click()
