@@ -27,3 +27,61 @@ Combinations of selectors:
 page.locator("input[placeholder='Your email address']".click()
 - XPATH
 page.locator("//input[@placeholder='Your email address']").click()
+
+XPATH:
+- parent element - space
+page.locator(".container p").click()
+- child element - '>'
+page.locator(".container > p").click()
+
+CSS - Pseudo classes
+- :right-of(div > button)
+page.locator("td:right-of(td p:text('D'))")
+- :left-of(div > button)
+page.locator("td:left-of(td p:text('S'))")
+- :above(div > button)
+page.locator("td:above(td p:text('C'))")
+- :below(div > button)
+page.locator("TD:below(td p:text('C'))")
+- :near(div > button) (50px)
+page.locator("td:near(td p:text('C'))")
+OR for X px: page.locator("td:below(td p:text('Software engineer'), 100)")
+- one of conditions:
+page.locator('button:has-text("Log in"), button:has-text("Sign in")').click()
+- nths element:
+page.locator("button").locator("nth=0").click()
+- :visible
+page.locator("button:visible").click()
+- :has-text()
+page.locator('div:has-text("Card")').click()
+
+Built-in locators get_by_*
+- page.get_by_text(text, **kwargs) - optional, exact=True
+- page.get_by_label(text, **kwargs) - button, input, select, textarea, etc
+- page.get_by_placeholder(text, **kwargs)
+- page.get_by_test_id(text, **kwargs)
+- page.get_by_alt_text(text, **kwargs)
+- page.get_by_title(text, **kwargs)
+- page.get_by_role(role, **kwargs) - ARIA, accessibility, optional - name='X'
+
+locator.or_
+- page.locator("input").or_(page.locator("text"))
+locator.and_
+- page.get_by_title("button", name="X").and_(page.get_by_title("Y"))
+
+Chains and filters
+- >>
+page.locator("#navbarNavDropdown >> li:has-text('Company')").click()
+- filter (has, has_not, has_text, has_not_text)
+page.locator("li").filter(has_text='Company').click()
+page.locator('li').filter(has=page.locator('.dropdown-toggle')).click()
+
+Several elements found
+- locator.count() - get number of elements
+page.get_by_role("button").count()
+- locator.first or locator.last
+page.get_by_role("listitem").first
+- locator.nth(X)
+page.get_by_role("listitem").nth(1)
+- locator.all()
+for i in page.get_by_role('listitem').all(): ...

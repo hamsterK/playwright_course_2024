@@ -1,0 +1,99 @@
+page.wait_for_selector()
+
+locator.click()
+locator.click(button='right')
+locator.click(force=True) - ignore interaction validation
+locator.fill(value)
+locator.type(text) - each symbol typed separately
+locator.press(key) - F1-F12, Backspace, Tab, Delete, Escape, ArrowDown, End, Enter, Home, Insert, PageDown, PageUp, ArrowRight, ArrowUp
+locator.check() - for checkboxes
+
+drop-down list
+1. select - used to create drop-dwon list
+2. option - each element of select
+- page.select_option('#floatingSelect', value='3') - value is default option, can type just '3'
+- page.select_option('#skills', value=["playwright", "python"]) - multiple options select
+- page.select_option('#floatingSelect', index=1)
+- page.select_option('#floatingSelect', label='option 1')
+
+drag and drop
+- page.drag_and_drop(source, target, **kwargs)
+page.drag_and_drop("#drag", "#drop")
+
+windows - alert, confirm, prompt - closed automatically by playwright
+def test_dialogs(page: Page):
+    page.goto("https://zimaev.github.io/dialog/")
+    page.on("dialog", lambda dialog: dialog.accept())
+    page.get_by_text("Диалог Confirmation").click()
+- dialog.accept()
+- dialog.default_value - returns default answer
+- dialog.dismiss()
+- dialog.message - returns text of message
+- dialiog.type - returns type of window
+
+File load
+def test_select_multiple(page):
+    page.goto(url)
+    page.set_input)files("#formFile", "hello.txt")
+    page.locator("#file-submit").click()
+OR
+def test_select_multiple(page):
+    page.goto(url)
+    page.on("filechooser", lambda file_chooser: file_chooser.set_files("hello.txt"))
+    page.locator("#formFile").click()
+OR
+def test_select_multiple(page):
+    page.goto(url)
+    with page.expect_file_chooser() as fc_info:
+        page.locator(#formFile").click()
+    file_chooser = fc_info.value
+    file_chooser.set_files("hello.txt")
+
+File download
+- listen event of download:
+    page.on("download", lambda download: print(download.path()))
+---
+def test_download(page):
+    page.goto("https://demoqa.com/upload-download")
+    with page.expect_download() as download_info:
+        page.locator("a:has-text(\"Download\")").click()
+    download = download_info.value
+    file_name = download.suggested_filename
+    destination_folder_path = "./data/"
+    download.save_as(os.path.join(destination_folder_path, file_name))
+---
+download.cancel()
+download.delete() - delete downloaded file
+download.failure() - return download error if occurred
+download.page - return object of page of download
+download.path() - path to downloaded file
+download.save_as(path)
+download.suggested_filename - return file name
+download.url - returns downloaded url
+
+Get element value
+element.inner_text()
+element.text_content() - all elements, including script and style
+row.all_inner_texts()
+row.all_text_contents()
+element.inner_html()
+
+Screenshots
+page.screenshot(path='screenshot.png')
+page.screenshot(path='screenshot.png', full_page=True)
+page.locator(".header").screenshot(path="screenshot.png")
+- arguments:
+full_page=True
+type='jpeg'
+quality=100
+clip={"x": 50, "y": 0, "width": 400, "height": 300}) - coordinates
+omit_background=True
+timeout=10000 - await in milliseconds before making screenshot
+
+Tabs
+def test_new_tab(page):
+    page.goto(url)
+    with page.context.expect_page() as tab:
+        page.get_by_text('Go to dashboard').click()
+    new_tab = tab.value
+----
