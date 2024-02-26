@@ -1,0 +1,25 @@
+expect(locator).to_be_checked()
+expect(locator).to_be_disabled()
+expect(locator).to_be_editable()
+expect(locator).to_be_empty()
+expect(locator).to_be_enabled()
+expect(locator).to_be_focused()
+expect(locator).to_be_hidden()
+expect(locator).to_be_visible()
+expect(locator).to_contain_text()
+expect(locator).to_have_attribute()
+expect(locator).to_have_class()
+expect(locator).to_have_count()
+expect(locator).to_have_css() - css parameters
+expect(locator).to_have_id()
+expect(locator).to_have_js_property()
+expect(locator).to_have_text()
+expect(locator).to_have_value()
+expect(locator).to_have_values()
+expect(page).to_have_title()
+expect(page).to_have_url()
+expect(api_response).to_be_ok()
+
+def test_foobar(page: Page) -> None:
+    expect(page.get_by_text("Name"), "Message is not displayed").to_be_visible()
+
