@@ -20,6 +20,10 @@ def test_todo(page):
     todo_items.get_by_role('checkbox').nth(0).click()
     expect(todo_items.nth(0)).to_have_class('completed')
 
-# set PWDEBUG=1
-# set PWDEBUG=console # for debug using pause
-# pytest --headed --slowmo 1000 test_assertions.py
+# set PWDEBUG=1  # enable debug mode (0 for disabling)
+# set PWDEBUG=console # output debug information to the console
+# pytest --headed --slowmo 1000 test_assertions_with_debug.py
+
+# pytest --tracing=on test_assertions_with_debug.py
+# pytest --tracing=retain-on-failure test_assertions_with_debug.py
+# playwright show-trace test-results/test-assertions-py-test-todo-chromium/trace.zip
