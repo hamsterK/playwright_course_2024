@@ -1,5 +1,5 @@
 import time
-from playwright.sync_api import Page, Route, expect
+from playwright.sync_api import Page
 
 
 def test_listen_network(page: Page):
@@ -20,7 +20,4 @@ def test_edit_response(page):
     page.route("**/api/tags", lambda route: route.fulfill(path="data.json"))
     page.goto('https://demo.realworld.io/')
     time.sleep(2)
-
-
-# def test_edit_response_2(page: Page):
 
